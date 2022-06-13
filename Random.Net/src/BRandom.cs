@@ -4,13 +4,15 @@ namespace SimpleX.Random
 {
     using SimpleX.Random.Internal;
 
-    // 据说速度很快的伪随机
+    // 由Bob Jinkens公开的生成随机数的方法
     // 详情见 http://burtleburtle.net/bob/rand/smallprng.html
-    public class QRandom : IRandom
+    // 微软的项目中也实现了该方法
+    // 详情见 https://github.com/microsoft/diskspd/blob/master/Common/Common.h
+    public class BRandom : IRandom
     {
         private int[] states = new int[4];
 
-        public QRandom()
+        public BRandom()
         {
             var seed = Const.Seed;
 
@@ -20,7 +22,7 @@ namespace SimpleX.Random
             states[3] = seed;
         }
 
-        public QRandom(int seed)
+        public BRandom(int seed)
         {
             states[0] = 214748357;
             states[1] = seed;

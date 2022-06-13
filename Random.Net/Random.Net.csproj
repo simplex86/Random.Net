@@ -48,11 +48,11 @@
     <Compile Include="src\Internal\Const.cs" />
     <Compile Include="src\IRandom.cs" />
     <Compile Include="src\LRandom.cs" />
-    <Compile Include="src\QRandom.cs" />
+    <Compile Include="src\BRandom.cs" />
     <Compile Include="src\SRandom.cs" />
-    <Compile Include="test\LRandomTest .cs" />
-    <Compile Include="test\SRandomTest.cs" />
-    <Compile Include="test\QRandomTest.cs" />
+    <Compile Include="test\EfficiencyTest.cs" />
+    <Compile Include="test\DistributionTest.cs" />
+    <Compile Include="test\RepetitionPeriodTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

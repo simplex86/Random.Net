@@ -4,20 +4,49 @@ using SimpleX.Random;
 
 namespace SimpleX.Random.Test
 {
-    class RepetitionPeriodTest
+    class Test2
     {
-        private const int seed = 123456789;
+        private const long REPEAT_TIMES = 100000000;
 
         public void Run()
         {
+            var seed = GetSeed();
+
             var sp = GetRepetitionPeriod(new SRandom(seed));
-            Console.WriteLine($"SRandom period = {sp}");
+            if (sp == REPEAT_TIMES)
+            {
+                Console.WriteLine($"SRandom 重复周期 > {sp}");
+            }
+            else
+            {
+                Console.WriteLine($"SRandom 重复周期 = {sp}");
+            }
 
             var lp = GetRepetitionPeriod(new LRandom(seed));
-            Console.WriteLine($"LRandom period = {lp}");
+            if (lp == REPEAT_TIMES)
+            {
+                Console.WriteLine($"LRandom 重复周期 > {lp}");
+            }
+            else
+            {
+                Console.WriteLine($"LRandom 重复周期 = {lp}");
+            }
 
             var bp = GetRepetitionPeriod(new BRandom(seed));
-            Console.WriteLine($"BRandom period = {bp}");
+            if (bp == REPEAT_TIMES)
+            {
+                Console.WriteLine($"BRandom 重复周期 > {bp}");
+            }
+            else
+            {
+                Console.WriteLine($"BRandom 重复周期 = {bp}");
+            }
+        }
+
+        private int GetSeed()
+        {
+            var dt = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt32(dt.TotalSeconds);
         }
 
         // 获取重复周期
@@ -27,10 +56,10 @@ namespace SimpleX.Random.Test
             List<int> shadow = new List<int>();
 
             long times = 0;
-            while (times < 100000000)
+            while (times < REPEAT_TIMES)
             {
-                var n = rand.Next(0, 100);
-                if (n < 0 || n > 100)
+                var n = rand.Next(0, 10000);
+                if (n < 0 || n > 10000)
                 {
                     Console.WriteLine($"{rand.GetType().Name} Error: random num = {n}");
                     break;

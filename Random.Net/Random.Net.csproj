@@ -50,9 +50,9 @@
     <Compile Include="src\LRandom.cs" />
     <Compile Include="src\BRandom.cs" />
     <Compile Include="src\SRandom.cs" />
-    <Compile Include="test\EfficiencyTest.cs" />
-    <Compile Include="test\DistributionTest.cs" />
-    <Compile Include="test\RepetitionPeriodTest.cs" />
+    <Compile Include="test\Test1.cs" />
+    <Compile Include="test\Test3.cs" />
+    <Compile Include="test\Test2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

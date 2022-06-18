@@ -3,16 +3,15 @@ using SimpleX.Random;
 
 namespace SimpleX.Random.Test
 {
-    class EfficiencyTest
+    class Test1
     {
         private long costTime = 0;
-
-        private const int seed = 123456789;
         private const int count = 100000;
-        private static readonly DateTime Utc1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
         public void Run()
         {
+            var seed = GetSeed();
+
             var sr = new SRandom(seed);
             BeginProfiler();
             for (int i = 0; i < count; i++)
@@ -21,7 +20,7 @@ namespace SimpleX.Random.Test
             }
             EndProfiler();
 
-            Console.WriteLine($"SRandom const {costTime} ms");
+            Console.WriteLine($"SRandom 耗时 {costTime} ms");
 
             var lr = new LRandom(seed);
             BeginProfiler();
@@ -31,7 +30,7 @@ namespace SimpleX.Random.Test
             }
             EndProfiler();
 
-            Console.WriteLine($"LRandom const {costTime} ms");
+            Console.WriteLine($"LRandom 耗时 {costTime} ms");
 
             var qr = new BRandom(seed);
             BeginProfiler();
@@ -41,18 +40,24 @@ namespace SimpleX.Random.Test
             }
             EndProfiler();
 
-            Console.WriteLine($"QRandom const {costTime} ms");
+            Console.WriteLine($"QRandom 耗时 {costTime} ms");
+        }
+
+        private int GetSeed()
+        {
+            var dt = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt32(dt.TotalSeconds);
         }
 
         private void BeginProfiler()
         {
-            TimeSpan ts = DateTime.UtcNow - Utc1970;
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             costTime = Convert.ToInt64(ts.TotalMilliseconds);
         }
 
         private void EndProfiler()
         {
-            TimeSpan ts = DateTime.UtcNow - Utc1970;
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             costTime = Convert.ToInt64(ts.TotalMilliseconds) - costTime;
         }
     }
